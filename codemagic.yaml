@@ -1,0 +1,19 @@
+workflows:
+  android-workflow:
+    name: UniTrack APK
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+    scripts:
+      - name: Create Android
+        script: |
+          flutter create . --platforms=android
+      - name: Get packages
+        script: |
+          flutter pub get
+      - name: Build APK
+        script: |
+          flutter build apk --release --no-tree-shake-icons
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
